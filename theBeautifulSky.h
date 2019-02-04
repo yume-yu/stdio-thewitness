@@ -143,28 +143,6 @@
 #define EDIT_EQIP_EDIT_FLAME_WIDTH				(WIDTH - 2)
 #define EDIT_EQIP_EDIT_FLAME_HEIGHT				2* (HEIGHT - 2) / 3
 
-//タイトル画面の星の数
-#define STAR_AMOUNT 											50
-#define TITLE_MENU_BASE_X									(WIDTH - 24)/2
-#define TITLE_MENU_BASE_Y									HEIGHT - 6
-
-/**
- *	@def
- *	マップ上のメニューに関する定数
- */
-#define MAP_WIN_WIDTH		(WIDTH - 2) / 3
-#define MAP_WIN_HEIGHT	6
-#define MAP_WIN_X				WIDTH - 1 - MAP_WIN_WIDTH
-#define MAP_WIN_Y				5
-
-/**
- *	@def
- *	マップ上のステータスメニューに関する定数
- */
-#define STAT_WIN_WIDTH		MAP_WIN_WIDTH  + 10
-#define STAT_WIN_HEIGHT		8
-#define STAT_WIN_X				MAP_WIN_X - (MAP_WIN_WIDTH + 10)
-
 
 /* 構造体の宣言 */
 
@@ -174,29 +152,8 @@ typedef struct {
 	int y;							//y座標
 	bool not_active;		//移動可能な座標かどうか
 	bool at_event;			//イベントが有るマスかどうか
+	bool was_passed;
 } arrow_pos;
-
-// character	キャラクターの基本ステータス構造体
-typedef struct {
-	char *name;					//名前
-	int hp;							//現在の体力
-	int max_hp;					//体力の最大値
-	int max_atk;				//与ダメージの上限
-	int min_atk;				//与ダメージの下限
-} character;
-
-// weapon 武器の基本ステータス構造体
-typedef struct {
-	char *name;					//名前
-	int atk;						//与ダメージ増加分
-	bool is_gun;				//銃であるかどうか
-} weapon;
-
-// protector 防具の基本ステータス構造体
-typedef struct {
-	char *name;					//名前
-	int def;						//防御力の増加分
-} protector;
 
 // extendstr ストーリー等表示文字列の構造体
 typedef struct {
@@ -210,28 +167,6 @@ typedef struct {
 	bool kbhit_flag;		//キーが押されているかを返すフラグ
 	int input_char;			//入力されたキー
 } input_assort;
-
-// stage マップを表す列挙
-typedef enum {
-	stage1,
-	stage2,
-	stage3_1,
-	stage3_2,
-	stage3_3,
-	stage4_1,
-	stage4_2,
-	stage4_3,
-	stage5,
-	ope_exp
-} stage;
-
-// event マップで起こるイベントを表す列挙
-typedef enum {
-	battle_event, //戦闘イベント
-	talk_event,		//会話イベント
-	move_map,			//マップ間の移動
-	open_menu			//メニューを開く
-} event;
 
 /* 定数の定義(const) */
 
@@ -288,8 +223,8 @@ int check_window(int width, int height, int x, int y, char *string);							//確
 void view_status();								//マップメニューでステータスを表示する関数
 void item_list_on_map();					//マップメニューでアイテム一覧を表示する関数
 int onmap_manu();									//マップメニューを開く関数
-void update_map(stage now_stage);	//表示するマップをステージに合わせて更新する関数
-/* ここまでmap_menu.cで定義する関数 */
 
 
-arrow_pos move_on_maze(int width, int height,arrow_pos map_coors[width][height],arrow_pos start_position);
+
+arrow_pos **make_coors(int rows,int lines);
+arrow_pos move_on_maze(int width, int height,arrow_pos **map_coors,arrow_pos start_position);

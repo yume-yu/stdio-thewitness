@@ -156,7 +156,7 @@ void wait_input_without_arrow(){
 void print_line(char string[], int x, int y){
 	mvcur(x,y);
 	printf("%s",string);
-	mvcur(0,HEIGHT + 1);
+	mvcur(1,1);
 }
 
 /*
@@ -170,7 +170,7 @@ void print_lines(char *string[], int x, int y, int num_lines){
 	for(int i = 0; i < num_lines; i++){
 		print_line(string[i],x,y+i);
 	}
-	mvcur(0,HEIGHT + 1);
+	mvcur(1,1);
 }
 
 /**

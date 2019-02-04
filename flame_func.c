@@ -42,7 +42,7 @@ void make_flame(int width, int height, int offset_x, int offset_y){
 	printf("┘");
 
 	//カーソル位置の初期化
-	mvcur(1,HEIGHT+1);
+	//mvcur(1,HEIGHT+1);
 }
 
 /**
