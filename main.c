@@ -50,7 +50,7 @@ int main (int argc,char *argv[]){
 	}
 	int lines = atoi(argv[2]);
 	if(lines % 2 == 0){
-		fprintf(stderr,"lines is even. that musr be odd.\n");
+		fprintf(stderr,"lines is even. that must be odd.\n");
 		return 1;
 	}
 	init_term();
@@ -58,9 +58,14 @@ int main (int argc,char *argv[]){
 	mvcur(1,1);
 
 	arrow_pos **map_pos = make_coors(rows,lines);
-
+	for(int i = 0; i < lines + 1;i++){
+		mvcur(rows  *  8 + 4,i+1);
+		for(int j = 0; j < rows; j++) {
+			printf("[%d,%d] ", map_pos[j][i].x, map_pos[j][i].y);
+		}
+	}
 	make_basemaze(rows,lines);
-	arrow_pos start_pos = {0,lines,0,0};
+	arrow_pos start_pos = {rows - 2,lines,0,0};
                        /*上オフセット+行数 */
 	for(int line = 0; line < lines; line++){
 		for(int row = 0; row < rows; row++){
@@ -70,5 +75,13 @@ int main (int argc,char *argv[]){
 	mvcur(0,1 + lines * 4 + 2 + 6);
 	fflush(stdout);
 
-	move_on_maze(rows,lines+1,map_pos,start_pos);
+	arrow_pos *result_route = move_on_maze(rows,lines+1,map_pos,start_pos);
+	int label = 0;
+	while(true) {
+		printf("{%d,%d}\n",result_route[label].x,result_route[label].y);
+		label++;
+		if(result_route[label].x == -1){
+			break;
+		}
+	}
 }

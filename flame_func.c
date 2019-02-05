@@ -46,22 +46,14 @@ void make_flame(int width, int height, int offset_x, int offset_y){
 }
 
 /**
- *	アニメーションつきフレーム表示
- * width    作成するフレームの幅
- * height   作成するフレームの高さ
- * x				作成するフレームの開始位置のx座標
- * y				作成するフレームの開始位置のy座標
+ * @fn
+ * アニメーションつきフレームを表示する関数
+ * @brief アニメーション付きフレーム表示
+ * @param (width)    作成するフレームの幅
+ * @param (height)   作成するフレームの高さ
+ * @param (x)		 作成するフレームの開始位置のx座標
+ * @param (y)		 作成するフレームの開始位置のy座標
  */
-/**
-* @fn
-* ここに関数の説明を書く
-* @brief 要約説明
-* @param (引数名) 引数の説明
-* @param (引数名) 引数の説明
-* @return 戻り値の説明
-* @sa 参照すべき関数を書けばリンクが貼れる
-* @detail 詳細な説明
-*/
 void animete_make_flame_speedfix(int width,int height,int x,int y){
 	int current_x;					//アニメーション中のフレームの現在の左上x座標
 	int current_y;					//アニメーション中のフレームの現在の左上y座標
