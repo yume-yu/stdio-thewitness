@@ -5,9 +5,9 @@
  * @date 2018/07/12
  */
 
-#include "theBeautifulSky.h"
+#include "stdio_witness.h"
 
-void set_coor_data(arrow_pos *target,int x,int y, int not_active,int at_event){
+void set_coor_data(arrow_pos *target,int x,int y, bool not_active,bool at_event){
 	target->x = x;
 	target->y = y;
 	target->not_active = not_active;
@@ -38,8 +38,8 @@ arrow_pos **make_coors(int rows,int lines){
 	return return_map;
 }
 
-/*エラーがうるさいのでとりあえず7*7特化で書く*/
-arrow_pos move_on_maze(int width, int height,arrow_pos **map_coors,arrow_pos start_position){
+arrow_pos *move_on_maze(int width, int height,arrow_pos **map_coors,arrow_pos start_position){
+	arrow_pos *route = (arrow_pos*)malloc(sizeof(arrow_pos)*100);
 	char *dis_circle[] = {
 		"████████",
 		"████████",
@@ -97,7 +97,10 @@ arrow_pos move_on_maze(int width, int height,arrow_pos **map_coors,arrow_pos sta
 				print_lines(circle,2+8*now_position.x,2+now_position.y*4,4);
 				break;
 		}
+		if(map_coors[now_position.x][now_position.y].at_event){
+			break;
+		}
 	}
-	return start_position;
+	return route;
 }
 

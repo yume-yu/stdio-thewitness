@@ -4,7 +4,7 @@
  * @author yume_yu
  * @date 2018/07/09
  */
-#include "theBeautifulSky.h"
+#include "stdio_witness.h"
 
 /*
  * フレームの作成関数
@@ -46,67 +46,22 @@ void make_flame(int width, int height, int offset_x, int offset_y){
 }
 
 /**
- * 横分割フレームの作成関数
- * width    作成するフレームの幅
- * height   作成するフレームの高さ
- * offset_x 作成するフレームの開始位置のx座標
- * offset_y 作成するフレームの開始位置のy座標
- * split_x  フレームの区切り線を入れるx座標
- */
-void make_vsflame(int width, int height, int offset_x, int offset_y, int split_x){
-	int print_width = width - 2;
-	int print_height = height - 2;
-	//1行目の描画
-	mvcur(offset_x,offset_y);
-	printf("┌");
-	for(int i = 0; i < print_width; i++){
-		if(i == split_x){
-			printf("┬");
-		}else{
-			printf("─");
-		}
-	}
-	printf("┐");
-	//中間部分の描画
-	for(int i = 0; i < print_height; i++){
-		mvcur(offset_x,offset_y + 1 + i);
-		printf("│");
-		for(int j = 0; j < print_width; j++){
-			if(j == split_x){
-				printf("│");
-			}else{
-				printf(" ");
-			}
-		}
-		printf("│");
-	}
-	//最終行部分の描画
-	mvcur(offset_x,offset_y + height - 1);
-	printf("└");
-	for(int i = 0; i < print_width; i++){
-		if(i == split_x){
-			printf("┴");
-		}else{
-			printf("─");
-		}
-	}
-	printf("┘");
-#if defined WINDOWS
-	printf("¥n");
-#elif defined MAC
-	printf("%c",ENTERKEY);
-#endif
-	//カーソル位置の初期化
-	mvcur(1,HEIGHT+1);
-}
-
-/**
  *	アニメーションつきフレーム表示
  * width    作成するフレームの幅
  * height   作成するフレームの高さ
  * x				作成するフレームの開始位置のx座標
  * y				作成するフレームの開始位置のy座標
  */
+/**
+* @fn
+* ここに関数の説明を書く
+* @brief 要約説明
+* @param (引数名) 引数の説明
+* @param (引数名) 引数の説明
+* @return 戻り値の説明
+* @sa 参照すべき関数を書けばリンクが貼れる
+* @detail 詳細な説明
+*/
 void animete_make_flame_speedfix(int width,int height,int x,int y){
 	int current_x;					//アニメーション中のフレームの現在の左上x座標
 	int current_y;					//アニメーション中のフレームの現在の左上y座標
