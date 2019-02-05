@@ -6,8 +6,6 @@
 		"▀▄    ▄▀",
 		"  ▀▀▀▀  ",
 	};
-int g_width = 58;
-int g_height= 30;
 
 void make_basemaze(int rows,int lines){
 	int maze_width 	= 1 + rows * 8 + 1;
@@ -25,8 +23,6 @@ void make_basemaze(int rows,int lines){
 		for(int row = 0; row < rows; row++){
 			if(line % 2 && row % 2){
 				make_flame(8,4,2+row*8,6+line*4);
-			}else{
-				//print_lines(circle,2+row*8,6 + line*4,4);
 			}
 		}
 	}
