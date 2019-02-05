@@ -30,13 +30,8 @@ void make_basemaze(int rows,int lines){
 			}
 		}
 	}
-	//print_line("▲",15,12);
-	//print_line("▲",35,21);
-	//print_line("▲",33,23);
-	//print_line("▲",37,23);
 	fflush(stdout);
 }
-
 
 int main (int argc,char *argv[]){
 	if(argc != 3){
@@ -61,10 +56,19 @@ int main (int argc,char *argv[]){
 	for(int i = 0; i < lines + 1;i++){
 		mvcur(rows  *  8 + 4,i+1);
 		for(int j = 0; j < rows; j++) {
-			printf("[%d,%d] ", map_pos[j][i].x, map_pos[j][i].y);
+			printf("[%2d,%2d] ", map_pos[j][i].x, map_pos[j][i].y);
 		}
 	}
 	make_basemaze(rows,lines);
+	char *square[] = {
+		"┌─┐",
+		"└─┘"
+	};
+	//print_lines(square,2+3*8 +3,6+3*4+1,2);
+	print_line("▲",2+3*8 +3,6+3*4+1);
+	//print_line("▲",35,21);
+	//print_line("▲",33,23);
+	//print_line("▲",37,23);
 	arrow_pos start_pos = {rows - 2,lines,0,0};
                        /*上オフセット+行数 */
 	for(int line = 0; line < lines; line++){

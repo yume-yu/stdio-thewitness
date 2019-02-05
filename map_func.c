@@ -81,7 +81,7 @@ arrow_pos *move_on_maze(int width, int height,arrow_pos **map_coors,arrow_pos st
 			case 'w':
 				print_lines(dis_circle,2+8*now_position.x,2 +4*now_position.y,4);
 				if(now_position.y <= 0 || map_coors[now_position.x][now_position.y - 1].not_active || map_coors[now_position.x][now_position.y - 1].was_passed) {
-					if (route_length > 0 && map_coors[now_position.x][now_position.y - 1].x == route[route_length - 1].x &&
+					if (now_position.y  > 0 && route_length > 0 && map_coors[now_position.x][now_position.y - 1].x == route[route_length - 1].x &&
 						map_coors[now_position.x][now_position.y - 1].y == route[route_length - 1].y) {
 						print_lines(space, 2 + 8 * now_position.x, 2 + 4 * now_position.y, 4);
 						map_coors[now_position.x][now_position.y].was_passed = 0;
@@ -99,7 +99,7 @@ arrow_pos *move_on_maze(int width, int height,arrow_pos **map_coors,arrow_pos st
 			case 's':
 				print_lines(dis_circle,2+8*now_position.x,2 +4*now_position.y,4);
 				if(now_position.y > height - 2 || map_coors[now_position.x][now_position.y + 1].not_active || map_coors[now_position.x][now_position.y + 1].was_passed){
-					if (route_length > 0 && map_coors[now_position.x][now_position.y + 1].x == route[route_length - 1].x &&
+					if (now_position.y < height && route_length > 0 && map_coors[now_position.x][now_position.y + 1].x == route[route_length - 1].x &&
 						map_coors[now_position.x][now_position.y + 1].y == route[route_length - 1].y) {
 						print_lines(space, 2 + 8 * now_position.x, 2 + 4 * now_position.y, 4);
 						map_coors[now_position.x][now_position.y].was_passed = 0;
@@ -117,7 +117,7 @@ arrow_pos *move_on_maze(int width, int height,arrow_pos **map_coors,arrow_pos st
 			case 'd':
 				print_lines(dis_circle,2+8*now_position.x,2 +4*now_position.y,4);
 				if(now_position.x > width - 2 || map_coors[now_position.x + 1][now_position.y].not_active|| map_coors[now_position.x + 1][now_position.y].was_passed){
-					if (route_length > 0 && map_coors[now_position.x + 1][now_position.y].x == route[route_length - 1].x &&
+					if (now_position.x < width - 1 && route_length > 0 && map_coors[now_position.x + 1][now_position.y].x == route[route_length - 1].x &&
 						map_coors[now_position.x + 1][now_position.y].y == route[route_length - 1].y) {
 						print_lines(space, 2 + 8 * now_position.x, 2 + 4 * now_position.y, 4);
 						map_coors[now_position.x][now_position.y].was_passed = 0;
