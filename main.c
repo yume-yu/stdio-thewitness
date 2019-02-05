@@ -34,20 +34,38 @@ void make_basemaze(int rows,int lines){
 }
 
 int main (int argc,char *argv[]){
-	if(argc != 3){
-		fprintf(stderr,"not enough args.\n");
+	/*列数 行数 開始地点行番号 列番号*/
+    int rows,lines,start_x,start_y;
+
+	if(argc != 2){
+		fprintf(stderr,"argument was shortage.\n");
 		return 1;
 	}
-	int rows = atoi(argv[1]);
-	if(rows % 2 == 0){
-		fprintf(stderr,"rows is even. that must be odd.\n");
+
+	FILE *fp = fopen(argv[1],"r");
+	if(fp == NULL){
+		fprintf(stderr,"file open error.\n");
 		return 1;
 	}
-	int lines = atoi(argv[2]);
-	if(lines % 2 == 0){
-		fprintf(stderr,"lines is even. that must be odd.\n");
+	printf("open file is %s\n",argv[1]);
+	int res = fscanf(fp,"%*s %d",&rows);
+	if(res == -1){
+		fprintf(stderr,"file format error. width is wrong.\n");
 		return 1;
 	}
+
+	res = fscanf(fp,"%*s %d",&lines);
+	if(res == -1){
+		fprintf(stderr,"file format error. height is wrong.\n");
+		return 1;
+	}
+
+	res = fscanf(fp,"%*s %d,%d",&start_x,&start_y);
+	if(res == -1){
+		fprintf(stderr,"file format error. startPoint is wrong.\n");
+		return 1;
+	}
+
 	init_term();
 
 	mvcur(1,1);
@@ -65,11 +83,11 @@ int main (int argc,char *argv[]){
 		"└─┘"
 	};
 	//print_lines(square,2+3*8 +3,6+3*4+1,2);
-	print_line("▲",2+3*8 +3,6+3*4+1);
+	print_line("▲",2+3*8 +4,6+3*4+1);
 	//print_line("▲",35,21);
 	//print_line("▲",33,23);
 	//print_line("▲",37,23);
-	arrow_pos start_pos = {rows - 2,lines,0,0};
+	arrow_pos start_pos = {start_x,start_y,0,0};
                        /*上オフセット+行数 */
 	for(int line = 0; line < lines; line++){
 		for(int row = 0; row < rows; row++){
